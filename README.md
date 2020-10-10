@@ -2,6 +2,7 @@
 
 # Setup Instructions
 `git clone https://github.com/dsgoh/ibm-wiesoc-debug.git`\
+`cd ibm-wiesoc-debug`\
 `source venv/bin/activate`
 
 # Libraries in the virtual environment
