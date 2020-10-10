@@ -1,12 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('base.html')
 
-@app.route('/individual/')
+@app.route('/individual/', methods=["GET", "POST"])
 def individual():
+    if request.method == "POST":
+        form = request.form
+        dest = form.get('DestinationInput')
+        print(dest)
     return render_template('individual.html')
 
 @app.route('/group/')
