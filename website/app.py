@@ -29,7 +29,8 @@ def individual_search():
     datetimein = request.args.get('datetimein', None)
     venueOut = request.args.get('venueOut', None)
     venueCOVIDSafeStatus = request.args.get('venueCOVIDSafeStatus', None)
-    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus)
+    route = request.args.get('route', None)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route)
 
 @app.route('/group/')
 def group():
