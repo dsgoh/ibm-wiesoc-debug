@@ -12,11 +12,11 @@ elasticsearch
 # Elastic Dashboard
 Elastic Cloud login: https://cloud.elastic.co/home
 
-password: deBUGUNSW2025!
+password: deBUGUNSW2025!\
 email: dsg2806+wiesocibm2020@gmail.com
 
-Go to Kibana, login:
-username: elastic
+Go to Kibana, login:\
+username: elastic\
 password: zBOSu57Izll5hD00vuARAY6u
 
 Then Visit the Dashboard
