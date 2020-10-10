@@ -14,8 +14,11 @@ def individual():
         dest = form.get('DestinationInput')
         datetimein = form.get('DatetimeIndividualInput')
         print(dest, datetimein)
-        venueOut = maps.queryVenue(dest)
+        v = maps.queryVenue(dest)
+        venueOut = v["formatted_address"]
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(venueOut)
+        # business name :)
+        venueName = v["name"]
         #print(covidsafe.checkCovidSafe(venue))
         return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus))
     return render_template('individual.html')
