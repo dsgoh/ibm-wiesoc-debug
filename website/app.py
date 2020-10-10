@@ -17,7 +17,7 @@ def individual():
         print(dest, datetimein)
         v = maps.queryVenue(dest)
         venueOut = v["name"] + " - " + v["formatted_address"]
-        venueCOVIDSafeStatus = covidsafe.checkCovidSafe(venueOut)
+        venueCOVIDSafeStatus = covidsafe.checkCovidSafe(v["formatted_address"])
         venueName = v["name"]
         #print(covidsafe.checkCovidSafe(venue))
         route = maps.queryRoute("Sydney City", dest, departure_time="now")
