@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,7 +12,14 @@ def individual():
         dest = form.get('DestinationInput')
         datetimein = form.get('DatetimeIndividualInput')
         print(dest, datetimein)
+        return redirect(url_for('individual_search', dest=dest, datetimein=datetimein))
     return render_template('individual.html')
+
+@app.route('/individual/search/', methods=["GET", "POST"])
+def individual_search():
+    dest = request.args.get('dest', None)
+    datetimein = request.args.get('datetimein', None)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein)
 
 @app.route('/group/')
 def group():
