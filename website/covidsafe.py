@@ -9,10 +9,16 @@ def checkCovidSafe(address):
     # postcode = a[4]["short_name"]
     # print(name)
     address = address.split(",")
-    address1 = address[0].upper()
-    address2 = address[1].strip().upper()
     
-    with urllib.request.urlopen('https://data.nsw.gov.au/data/api/3/action/datastore_search?resource_id=4a26e0f0-71e1-43bb-96a8-e1434bbce9d8') as url:
+    address1 = " ".join(address[0].split(" ")[:-1])
+    address1 = address1.upper()
+
+    address2 = address[1].strip()
+    suburb = address2.split(" ")[0]
+
+    address2 = address2.upper()
+    
+    with urllib.request.urlopen(f'https://data.nsw.gov.au/data/api/3/action/datastore_search?resource_id=4a26e0f0-71e1-43bb-96a8-e1434bbce9d8&q={suburb}') as url:
             dataJSON = json.load(url) # dataJSON is a nested dict
             businesses = list(dataJSON["result"]["records"])
             # print(businesses[0])
@@ -34,4 +40,4 @@ def checkCovidSafe(address):
 
 
 
-# print(checkCovidSafe("Ben Hall Beau Thai", "99 Lachlan St", "FORBES", "2871"))
+print(checkCovidSafe("2/309 Anzac Parade, Kingsford NSW 2032"))

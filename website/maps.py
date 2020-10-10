@@ -13,7 +13,7 @@ def queryVenue(input):
     """
     place_id = gmaps.find_place(input=input, input_type="textquery")
     place = gmaps.place(place_id=place_id['candidates'][0]['place_id'])
-    return place['result']["formatted_address"]
+    return place['result']
 
 # if __name__ == "__main__":
     # print(queryVenue("Mcdonalds George St Sydney"))
