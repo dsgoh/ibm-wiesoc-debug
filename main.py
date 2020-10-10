@@ -41,7 +41,6 @@ if __name__ == "__main__":
     time.sleep(1)
     '''
     while True:
-
         #taxi_elasticWorker.log_index(es, index, m)
         time.sleep(1)
     '''
