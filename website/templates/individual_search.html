@@ -42,23 +42,37 @@
 
   <header class="bg-danger text-white">
     <div class="container text-center">
-      <h1>Results</h1>
-      <h3>Travelling to {{ venueOut }} at {{ datetimein }} ...</h3>
-      <br><br><br>
+      <h1>Travelling to {{ venueOut }} at {{ datetimein }} ...</h1>
+      <br><br>
       <div class="container-fluid">
         <div class="row">
           
           <div class="col-md-6">
             <h3>
               {% if venueCOVIDSafeStatus == "True" %}
-              The business is a COVID Safe Business.
-              {% else %}
-              The business is NOT a COVID Safe Business.
-              {% endif %}
+              <img alt="covid-safe-logo" data-entity-type="file" data-entity-uuid="bd72c3e2-2337-45e2-b2cc-71d65e28d4c9" height="100" src="https://www.nsw.gov.au/sites/default/files/2020-06/covid-safe-logo.png" width="100" class="align-right">
+              <br><br>The business is a COVID Safe Business.
             </h3>
             <p>
-              Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+
+               {% else %}
+
+              The business is NOT a COVID Safe Business.
+            </h3>
+            <p>
+              This business has not agreed to the following NSW Health guidance:<br>
+Physical distancing<br>
+Four square metre rule<br>
+Face masks<br>
+Self-isolation and quarantine<br>
+Cleaning and disinfection in the workplace<br>
+              {% endif %}
             </p>
+            <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x2/public/2020-08/dsicon-hygiene-marshal.png?itok=IDhuj7GU" width="50" height="50" alt="Cleaning" typeof="foaf:Image">
+            <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x2/public/2020-08/dsicon-cleaning-v2.png?itok=bOOzJj9J" width="50" height="50" alt="Cleaning" typeof="foaf:Image">
+            <br><br>COVID Safe businesses and organisations are committed to getting back to work while protecting the community and preventing the spread of COVID-19.
+             <br><br>Find more information on COVID Safe Businesses <a href="https://www.nsw.gov.au/covid-19/covid-safe">here.</a> 
+             
           </div>
           
           <div class="col-md-6">
@@ -70,6 +84,7 @@
             </p>
           </div>
         </div>
+        <br><br>
         <div class="row">
           <div class="col-md-12">
             <h3>
