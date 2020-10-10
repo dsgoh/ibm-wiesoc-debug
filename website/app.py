@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import maps
+import covidlocation
 import covidsafe
 import time
 import venue
@@ -23,6 +24,13 @@ def individual():
         venueOut = v["name"] + ", " + v["formatted_address"]
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(v["formatted_address"])
         venueName = v["name"]
+
+        ###
+        postcode = covidlocation.getPostcode(v)
+        case_numbers = covidlocation.checkCovidLocation(v)
+        print(case_numbers)
+
+        #print(covidsafe.checkCovidSafe(venue))
         route = maps.queryRoute("Sydney City", dest, departure_time="now")
         if route is None:
             route = "No value returned for route."
