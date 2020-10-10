@@ -1,4 +1,5 @@
 import urllib.request
+from difflib import SequenceMatcher
 import json
 
 def checkCovidSafe(address):
@@ -10,8 +11,8 @@ def checkCovidSafe(address):
     # print(name)
     address = address.split(",")
     
-    address1 = " ".join(address[0].split(" ")[:-1])
-    address1 = address1.upper()
+    # address1 = " ".join(address[0].split(" ")[:-1])
+    address1 = address[0].upper()
 
     address2 = address[1].strip()
     suburb = address2.split(" ")[0]
@@ -24,20 +25,22 @@ def checkCovidSafe(address):
             # print(businesses[0])
 
             for business in businesses:
-                if not business["Business_standardised_street_address"]: continue
-                if not business["Business_standardised_Suburb"]: continue
-                if not business["Business_standardised_State"]: continue
-                if not business["Business_standardised_Postcode"]: continue
+                # if not business["Business_standardised_street_address"]: continue
+                # if not business["Business_standardised_Suburb"]: continue
+                # if not business["Business_standardised_State"]: continue
+                # if not business["Business_standardised_Postcode"]: continue
 
-                address1_b = business["Business_standardised_street_address"].upper()
-                address2_b = f'{business["Business_standardised_Suburb"]} {business["Business_standardised_State"]} {business["Business_standardised_Postcode"]}'.upper()
+                address1_b = business["Business_reported_street_address"].upper()
+                address2_b = f'{business["Business_reported_suburb"]} {business["Business_reported_state"]} {business["Business_reported_postcode"]}'.upper()
                 # if (name.upper() == business["Business_reported_name"].upper() and
-                if ((address1 in address1_b or address1_b in address1) and
-                    (address2 in address2_b or address2_b in address2)):
+                if (similar(address1, address1_b) and similar(address2, address2_b)):
                     return True
 
     return False
 
 
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio() > 0.75
 
 print(checkCovidSafe("2/309 Anzac Parade, Kingsford NSW 2032"))
