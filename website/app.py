@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import maps
+import covidsafe
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,6 +14,8 @@ def individual():
         dest = form.get('DestinationInput')
         datetimein = form.get('DatetimeIndividualInput')
         print(dest, datetimein)
+        venue = maps.queryVenue(dest)
+        print(covidsafe.checkCovidSafe(venue))
     return render_template('individual.html')
 
 @app.route('/group/')
