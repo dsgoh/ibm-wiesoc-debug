@@ -16,7 +16,7 @@ def individual():
         datetimein = form.get('DatetimeIndividualInput')
         print(dest, datetimein)
         v = maps.queryVenue(dest)
-        venueOut = v["formatted_address"]
+        venueOut = v["name"] + " - " + v["formatted_address"]
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(venueOut)
         venueName = v["name"]
         #print(covidsafe.checkCovidSafe(venue))
