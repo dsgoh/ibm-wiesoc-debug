@@ -15,8 +15,15 @@ def queryVenue(input):
     place = gmaps.place(place_id=place_id['candidates'][0]['place_id'])
     return place['result']['formatted_address']
 
+def queryRoute(origin, destination, departure_time=None, arrival_time=None):
+    """
+    Use googlemaps to query route from origin to destination
+    """
+    route = gmaps.directions(origin=origin, destination=destination, departure_time=departure_time, arrival_time=arrival_time)
+    return route
+
 # if __name__ == "__main__":
-    # print(queryVenue("Mcdonalds George St Sydney"))
+#     queryRoute("Mcdonalds George St Sydney", "Queen Victoria Building Sydney")
 
 #     # Geocoding an address
 #     geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
