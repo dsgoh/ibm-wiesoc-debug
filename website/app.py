@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import maps
 import covidsafe
+import time
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,10 +18,10 @@ def individual():
         v = maps.queryVenue(dest)
         venueOut = v["formatted_address"]
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(venueOut)
-        # business name :)
         venueName = v["name"]
         #print(covidsafe.checkCovidSafe(venue))
-        route = maps.queryRoute("Sydney City", dest), None, None
+        route = maps.queryRoute("Sydney City", dest, departure_time="now")
+        #route = maps.queryRoute("Sydney City", dest, departure_time=int(time.mktime(time.strptime(datetimein, '%Y-%m-%dT%H:%M'))))
         return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route))
     return render_template('individual.html')
 
