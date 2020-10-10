@@ -10,7 +10,8 @@ def individual():
     if request.method == "POST":
         form = request.form
         dest = form.get('DestinationInput')
-        print(dest)
+        datetimein = form.get('DatetimeIndividualInput')
+        print(dest, datetimein)
     return render_template('individual.html')
 
 @app.route('/group/')
