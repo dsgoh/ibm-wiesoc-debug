@@ -20,7 +20,8 @@ def individual():
         # business name :)
         venueName = v["name"]
         #print(covidsafe.checkCovidSafe(venue))
-        return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus))
+        route = maps.queryRoute("Sydney City", dest), None, None
+        return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route))
     return render_template('individual.html')
 
 @app.route('/individual/search/', methods=["GET", "POST"])
