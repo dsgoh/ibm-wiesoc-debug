@@ -1,6 +1,6 @@
-import pandas # pip install
-import requests
-from io import StringIO
+# import pandas # pip install
+# import requests
+# from io import StringIO
 import maps
 
 def getClosestStation(query):
