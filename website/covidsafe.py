@@ -1,15 +1,14 @@
 import urllib.request
 import json
 
-def checkCovidSafe(venue):
+def checkCovidSafe(address):
     # name = venue["name"]
     # a = venue["address_components"]
     # street_address = a[0]["short_name"]
     # suburb = a[1]["short_name"]
     # postcode = a[4]["short_name"]
     # print(name)
-    print(venue["formatted_address"])
-    address = venue["formatted_address"].split(",")
+    address = address.split(",")
     address1 = address[0].upper()
     address2 = address[1].strip().upper()
     
