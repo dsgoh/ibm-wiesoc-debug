@@ -16,8 +16,10 @@ def individual():
         print(dest, datetimein)
         venueOut = maps.queryVenue(dest)
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(venueOut)
-        #print(covidsafe.checkCovidSafe(venue))
-        return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus))
+        
+        route = maps.queryRoute("Sydney City", dest, departure_time=departure_time)
+
+        return redirect(url_for('individual_search', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route))
     return render_template('individual.html')
 
 @app.route('/individual/search/', methods=["GET", "POST"])
@@ -26,7 +28,8 @@ def individual_search():
     datetimein = request.args.get('datetimein', None)
     venueOut = request.args.get('venueOut', None)
     venueCOVIDSafeStatus = request.args.get('venueCOVIDSafeStatus', None)
-    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus)
+    route = request.args.get('route', None)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route)
 
 @app.route('/group/')
 def group():
