@@ -30,11 +30,19 @@ def checkCovidSafe(address):
                 # if not business["Business_standardised_State"]: continue
                 # if not business["Business_standardised_Postcode"]: continue
 
-                address1_b = business["Business_reported_street_address"].upper()
-                address2_b = f'{business["Business_reported_suburb"]} {business["Business_reported_state"]} {business["Business_reported_postcode"]}'.upper()
+                try:
+                    address1_b = business["Business_reported_street_address"].upper()
+                except:
+                    continue
+                try:
+                    address2_b = f'{business["Business_reported_suburb"]} {business["Business_reported_state"]} {business["Business_reported_postcode"]}'.upper()
+                except:
+                    continue
                 # if (name.upper() == business["Business_reported_name"].upper() and
-                if (similar(address1, address1_b) and similar(address2, address2_b)):
+                if (similar(address1, address1_b) or similar(address2, address2_b)):
                     return True
+                print(address1, address1_b)
+                print(address2, address2_b)
 
     return False
 
