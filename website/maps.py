@@ -15,6 +15,15 @@ def queryVenue(input):
     place = gmaps.place(place_id=place_id['candidates'][0]['place_id'])
     return place['result']
 
+
+def queryRoute(origin, destination, departure_time=None, arrival_time=None):
+    """
+    Use googlemaps to query route from origin to destination
+    """
+    route = gmaps.directions(origin=origin, destination=destination, departure_time=departure_time, arrival_time=arrival_time, mode="transit")
+    return route
+
+
 # if __name__ == "__main__":
     # print(queryVenue("Mcdonalds George St Sydney"))
 
