@@ -7,7 +7,7 @@ def getClosestStation(query):
     """
     Gets closest station to our long lat position and returns string of station name
     """
-    return maps.queryVenue("train stations near " + query).partition(" ")[0] # get just name of station
+    return maps.queryVenue("train stations near " + query)['formatted_address'].partition(" ")[0] # get just name of station
 
 
 def queryROAM(station):
@@ -20,7 +20,7 @@ def queryROAM(station):
     # print(data)
 
     data = 0
-    with open("ROAM.csv", "r") as roam:
+    with open("../ROAM.csv", "r") as roam:
         for train in roam:
             if train.startswith(station):
                 data = (train[::-1].partition("-")[0])[::-1] # reverse string to get info at end of string

@@ -4,6 +4,7 @@ import covidsafe
 import time
 import venue
 from datetime import datetime
+import route as rt
 import json
 import sys
 app = Flask(__name__)
@@ -43,6 +44,19 @@ def individual_search():
     print("VF: ", venueForecast)
     newJson = json.loads(venueForecast)
 
+    # Route
+    route = rt.queryROAM(rt.getClosestStation(dest))
+    busyRouteStatus = 0
+    if (route <= 70):
+        busyRouteStatus = 0
+    if (route <= 120):
+        busyRouteStatus = 1
+    if (route <= 180):
+        busyRouteStatus = 2
+    if (route > 180):
+        busyRouteStatus = 3
+
+    # Venu
     busyVenueStatus = 0
     busyVenueData = 0
     datetimeobject = datetime.strptime(datetimein, '%Y-%m-%dT%H:%M')
@@ -66,7 +80,7 @@ def individual_search():
                     busyVenueStatus = 3
                 busyVenueData = something
     
-    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData, busyRouteStatus=busyRouteStatus)
 
 @app.route('/group/')
 def group():
