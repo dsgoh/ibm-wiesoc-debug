@@ -120,6 +120,7 @@ Cleaning and disinfection in the workplace<br>
             {% if busyVenueData != 0 %}
             The business opening hours are {{ busyVenueData['day_info']['venue_open'] }}:00 until {{ busyVenueData['day_info']['venue_closed'] }}:00.
             <br>
+            {% if busyVenueData['busy_hours']: %}
             The business is generally busy at the following hours of the day: 
             {% for hour in busyVenueData['busy_hours'] %}
             {% if hour == busyVenueData[-1]: %}
@@ -132,9 +133,16 @@ Cleaning and disinfection in the workplace<br>
             However, the peak hours are between {{ busyVenueData['peak_start'] }} and {{ busyVenueData['peak_end'] }}.
             <br>
             {% else %}
-            Estimation data for this business is not available. Venue found, but could not forecast this venue. Potential issues include: This place closed for the whole week, is too new, or not does not have enough volume (visitors) to make a forecast.
+            The business is not busy today.
             {% endif %}
-            <br>
+            
+            {% elif busyVenueData == 1 %}
+            Business is closed at these hours.
+            {% else %}
+
+            Estimation data for this business is not available. The venue was found, but could not forecast this venue. Potential issues include: This place closed for the whole week, is too new, or not does not have enough volume (visitors) to make a forecast.
+            {% endif %}
+            <br><br>
             Estimations have been made based on anonymised people counts averaged over time.
             Google has <a href="https://support.google.com/business/answer/6263531?hl=en">developed</a> this information from their services.
           </div>

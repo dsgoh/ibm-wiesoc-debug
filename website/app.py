@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
 import maps
-import covidlocation
 import covidsafe
 import time
 import venue
@@ -24,13 +23,6 @@ def individual():
         venueOut = v["name"] + ", " + v["formatted_address"]
         venueCOVIDSafeStatus = covidsafe.checkCovidSafe(v["formatted_address"])
         venueName = v["name"]
-
-        ###
-        postcode = covidlocation.getPostcode(v)
-        case_numbers = covidlocation.checkCovidLocation(v)
-        print(case_numbers)
-
-        #print(covidsafe.checkCovidSafe(venue))
         route = maps.queryRoute("Sydney City", dest, departure_time="now")
         if route is None:
             route = "No value returned for route."
@@ -48,50 +40,32 @@ def individual_search():
     venueCOVIDSafeStatus = request.args.get('venueCOVIDSafeStatus', None)
     route = request.args.get('route', None)
     venueForecast = request.args.get('venueForecast', None).replace("\'", '\"')
-    #print("VF: ", venueForecast)
+    print("VF: ", venueForecast)
     newJson = json.loads(venueForecast)
-    print(newJson.keys())
+
     busyVenueStatus = 0
     busyVenueData = 0
     datetimeobject = datetime.strptime(datetimein, '%Y-%m-%dT%H:%M')
-    if 'analysis' in newJson.keys():
+    if "analysis" not in newJson:
+        busyVenueData = 0
+    else:
         for something in newJson['analysis']:
             if something["day_info"]["day_int"] == datetimeobject.weekday():
                 venueForecast = something
-                flag = False
                 #print(datetimeobject.hour, something['peak_hours'][0]['peak_start'], something['peak_hours'][0]['peak_end'])
-                try:
-                    if datetimeobject.hour in something['quiet_hours']:
-                        busyVenueStatus = 0
-                        flag = True
-                except:
-                    continue
-                try:
-                    if datetimeobject.hour in something['busy_hours']:
-                        busyVenueStatus = 1
-                        flag = True
-                except:
-                    continue
+                if datetimeobject.hour in something['quiet_hours']:
+                    busyVenueStatus = 0
+                if datetimeobject.hour in something['busy_hours']:
+                    busyVenueStatus = 1
                 try:
                     if (int(datetimeobject.hour) >= int(something['peak_hours'][0]['peak_start'])) and (int(datetimeobject.hour) <= int(something['peak_hours'][0]['peak_end'])):
                         busyVenueStatus = 2
-                        flag = True
                 except:
-                    continue
-                try:
-                    if datetimeobject.hour == something['surge_hours']['most_people_come']:
-                        busyVenueStatus = 3
-                        flag = True
-                except:
-                    continue
-                
-                if (flag):
-                    busyVenueData = something
-                print("OUT!")
-    else:
-        busyVenueStatus = 0
-        busyVenueData = 0
-                        
+                    pass
+                if datetimeobject.hour == something['surge_hours']['most_people_come']:
+                    busyVenueStatus = 3
+                busyVenueData = something
+    
     return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData)
 
 @app.route('/group/')
