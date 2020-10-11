@@ -46,7 +46,7 @@ def individual_search():
     newJson = json.loads(venueForecast)
 
     # Route
-    route = rt.queryROAM(rt.getClosestStation(dest))
+    route = rt.queryROAM(rt.getClosestStation(dest), datetimein)
     busyRouteStatus = 0
     if (route <= 70):
         busyRouteStatus = 0
