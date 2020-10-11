@@ -77,13 +77,17 @@ Cleaning and disinfection in the workplace<br>
           
           <div class="col-md-6">
             <h3>
+              {% if covidCountsInSuburbs > 0 %}
               <img src="https://transportnsw.info/sites/default/files/styles/tiles/public/image/2019/03/alert-blue-f6bg.jpg?itok=c6YpPnsy" alt="" typeof="foaf:Image" height=100 width=140><br><br>
-              Your travel routes are not likely to be COVID safe due to high occupancy and reduced social distancing.
+              Your destination has had {{ covidCountsInSuburbs }} counts of COVID-19 in the last 14 days.
+              {% else %}
+              <img src="https://www.health.gov.au/sites/default/files/styles/square_thumbnail/public/covidsafe-app_1.png?itok=7NwBzw8l" alt="" typeof="foaf:Image" height=100 width=100><br><br>
+              Your destination has had 0 counts of COVID-19 in the last 14 days.
+              {% endif %}
             </h3>
-            {{ route }}
+            
             <p>
-              
-              Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+              Note: States and territories provide these figures daily. Due to the dynamic nature of case data, state and territory health departments may revise their daily numbers. Where previously reported cases are excluded after further investigation this may result in a reduction of total case numbers. *Locally acquired cases reported in the last 7 days includes cases reported as under investigation.
             </p>
           </div>
         </div>
@@ -140,7 +144,7 @@ Cleaning and disinfection in the workplace<br>
             Business is closed at these hours.
             {% else %}
 
-            Estimation data for this business is not available. The venue was found, but could not forecast this venue. Potential issues include: This place closed for the whole week, is too new, or not does not have enough volume (visitors) to make a forecast.
+            Estimation data for this business is not available. The venue was found, but could not be forecasted. Potential issues include: This place is not a business, closed for the whole week, is too new, or not does not have enough volume (visitors) to make a forecast.
             {% endif %}
             <br><br>
             Estimations have been made based on anonymised people counts averaged over time.
