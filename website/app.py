@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import maps
 import covidsafe
+import covidlocation
 import time
 import venue
 from datetime import datetime
@@ -65,8 +66,10 @@ def individual_search():
                 if datetimeobject.hour == something['surge_hours']['most_people_come']:
                     busyVenueStatus = 3
                 busyVenueData = something
+
+    covidCountsInSuburbs = covidlocation.checkCovidLocation(maps.queryVenue(venueOut))
     
-    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData, covidCountsInSuburbs=covidCountsInSuburbs)
 
 @app.route('/group/')
 def group():
