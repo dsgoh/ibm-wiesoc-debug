@@ -2,8 +2,11 @@
 # import requests
 # from io import StringIO
 from datetime import datetime
+import operator
 import maps
-import random
+
+def nearest(items, pivot):
+    return min(items, key=lambda d: abs(datetime.strptime(d[0], '%b %d %Y %I:%M%p') - pivot))
 
 def getClosestStation(query):
     """
@@ -25,14 +28,13 @@ def queryROAM(station, datetimein):
     with open("../ROAM.csv", "r") as roam:
         for train in roam:
             if train.startswith(station):
-                val = train[::-1].partition("-")[0][::-1] # reverse string to get info at end of string
-                data.append(val)
-                break
+                trainSplit = list(train.split("|"))
+                dt = trainSplit[3]
+                occ = trainSplit[-1].partition("-")[0]
     if (isinstance(data, str) or len(data) == 0):
         return 0
-    return data[random.random() % len(data)]
+    return data[0][1]
 
 if __name__ == "__main__":
-    station = getClosestStation("Woolworths Parramatta")
-    print(station)
+    station = getClosestStation("Belfield")
     print(queryROAM(station, datetime.now()))
