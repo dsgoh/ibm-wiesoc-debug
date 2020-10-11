@@ -82,8 +82,18 @@ def individual_search():
                 busyVenueData = something
 
     covidCountsInSuburbs = covidlocation.checkCovidLocation(maps.queryVenue(venueOut))
+
+    risk = "LOW_RISK"
+    if venueCOVIDSafeStatus == False or covidCountsInSuburbs > 0:
+        risk = "HIGH_RISK"
+    elif (busyRouteStatus + busyVenueStatus) > 3:
+        risk = "HIGH_RISK"
+    elif (busyRouteStatus + busyVenueStatus) < 4:
+        risk = "MEDIUM_RISK"
+    else:
+        risk = LOW_RISK
     
-    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData, busyRouteStatus=busyRouteStatus, covidCountsInSuburbs=covidCountsInSuburbs)
+    return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData, busyRouteStatus=busyRouteStatus, covidCountsInSuburbs=covidCountsInSuburbs, risk=risk)
 
 @app.route('/group/')
 def group():
