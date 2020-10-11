@@ -150,9 +150,32 @@ Cleaning and disinfection in the workplace<br>
           <div class="col-md-6">
             
             <img src="https://transportnsw.info/sites/default/files/styles/tiles_desktop_x2/public/image/2020/08/face-mask-story.jpg?itok=J0UDW35g" alt="" typeof="foaf:Image" width=140 length=140>
-            <h3>
-              This public transport route is BUSY, and has a reduced chance of following COVID Safe social distancing principles.
+            
+            {% if busyRouteStatus == 0 %}
+              <img src="https://transportnsw.info/sites/default/files/styles/tiles_desktop_x2/public/image/2019/03/alert-blue-f6bg.jpg?itok=bcSCNE7e" alt="" typeof="foaf:Image" width=140 height=100>
+              <br><br>This public transport route is NOT BUSY, and is following COVID Safe social distancing principles.
             </h3>
+            <p>
+
+               {% elif busyRouteStatus == 1 %}
+               <img src="https://transportnsw.info/sites/default/files/styles/tiles/public/image/2019/03/alert-blue-f6bg.jpg?itok=c6YpPnsy" alt="" typeof="foaf:Image" height=100 width=140><br>
+               <br>This public transport route is SOMEWHAT BUSY, and has a reduced chance of following COVID Safe social distancing principles.
+            </h3>
+            <p>
+
+              {% elif busyRouteStatus == 2 %}
+              <img src="https://transportnsw.info/sites/default/files/styles/tiles/public/image/2019/03/alert-blue-f6bg.jpg?itok=c6YpPnsy" alt="" typeof="foaf:Image" height=100 width=140><br>
+               <br>This public transport route is BUSY, and has a reduced chance of following COVID Safe social distancing principles.
+            </h3>
+            <p>
+
+              {% elif busyRouteStatus == 3 %}
+              <img src="https://transportnsw.info/sites/default/files/styles/tiles/public/image/2019/03/alert-blue-f6bg.jpg?itok=c6YpPnsy" alt="" typeof="foaf:Image" height=100 width=140><br>
+               <br>This public transport route is VERY BUSY, and is impossible to follow COVID Safe social distancing principles.
+            </h3>
+            <p>
+              
+              {% endif %}
            
             <p>
               Please wear a face mask on public transport. NSW Health strongly <a href = "https://transportnsw.info/covid-19/covid-19-safer-travel-guidance">recommends</a> wearing a face mask.
