@@ -4,7 +4,7 @@ import json
 
 import maps
 
-BESTTIME_KEY = 'pri_1db2d347883b45f2a98961c75a4221ae'
+BESTTIME_KEY = 'API key from site'
 
 def checkAuthorisation():
     """
