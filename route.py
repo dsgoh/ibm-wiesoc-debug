@@ -1,6 +1,3 @@
-# import pandas # pip install
-# import requests
-# from io import StringIO
 import maps
 
 def getClosestStation(query):
@@ -14,7 +11,7 @@ def queryROAM(station):
     """
     Query the Rail Opal Assignment Model provided by Transport for NSW and returns an occupancy status
     """
-    # requires login
+    # requires login to TfNSW opendata platform
     # response = requests.request("GET", "https://tfnsw-prod-opendata-tpa.s3-ap-southeast-2.amazonaws.com/ROAM/2020-10/ROAM_20201009.txt")
     # data = pandas.read_csv(StringIO(response.text))
     # print(data)

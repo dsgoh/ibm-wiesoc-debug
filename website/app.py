@@ -90,8 +90,6 @@ def individual_search():
         risk = "HIGH_RISK"
     elif (busyRouteStatus + busyVenueStatus) < 4:
         risk = "MEDIUM_RISK"
-    else:
-        risk = LOW_RISK
     
     return render_template('individual_search.html', dest=dest, datetimein=datetimein, venueOut=venueOut, venueCOVIDSafeStatus=venueCOVIDSafeStatus, route=route, venueForecast=venueForecast, busyVenueStatus=busyVenueStatus, busyVenueData=busyVenueData, busyRouteStatus=busyRouteStatus, covidCountsInSuburbs=covidCountsInSuburbs, risk=risk)
 

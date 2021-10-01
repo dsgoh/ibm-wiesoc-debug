@@ -7,8 +7,8 @@ import json
 import elasticWorker
 
 es = Elasticsearch(
-    cloud_id="ibm-wiesoc-debug:YXAtc291dGhlYXN0LTIuYXdzLmZvdW5kLmlvJGI0NzU1NWI1ZDhmNzRmMzg4NzM1NDUxNzQyZjRiOTYyJGQ3MjUxNDU1NWJkYzQyZWU4MDM2NzQ5OWVhNDY3ZTAz",
-    http_auth=("elastic", "zBOSu57Izll5hD00vuARAY6u"),
+    cloud_id="ES-CLOUD-ID",
+    http_auth=("ES-USER", "ES-PASS"),
 )
 
 def COVIDSafeBusinesses_metadata(timestamp, Business_reported_name, Business_reported_industry,	Business_reported_address, Business_reported_street_address, Business_reported_suburb, Business_reported_state, Business_reported_country, Business_reported_postcode, Business_standardised_address, Business_standardised_street_address, Business_standardised_Suburb, Business_standardised_State, Business_standardised_Postcode, Longitude, Latitude):
